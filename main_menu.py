@@ -7,7 +7,7 @@ class MainMenu:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Айтішники")
-        self.root.geometry("400x300")
+        self.root.geometry("400x420")
         self.root.resizable(False, False)
         self.bg_color = "#c0c0c0"
         self.root.configure(bg=self.bg_color)
