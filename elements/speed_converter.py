@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
 
-
 class SpeedConverterApp:
     def __init__(self, root=None):
         self.root = root if root is not None else tk.Tk()

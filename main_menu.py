@@ -53,6 +53,9 @@ class MainMenu:
 
     def open_radius_calculator(self):
         win = tk.Toplevel(self.root)
+        win.title("Radius Calculator")
+        win.transient(self.root)
+        win.focus_set()
         RadiusCalculator(root=win)
 
     def run(self):

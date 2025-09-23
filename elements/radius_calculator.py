@@ -3,8 +3,14 @@ import math
 
 
 class RadiusCalculator:
-    def __init__(self, root):
-        self.root = root
+    def __init__(self, root=None):
+        # allow creating without passing a root: create one when None
+        if root is None:
+            self.root = tk.Tk()
+            self._owns_root = True
+        else:
+            self.root = root
+            self._owns_root = False
         self.root.title("Radius Calculator")
         self.root.geometry("600x400")
         self.root.resizable(False, False)
@@ -62,9 +68,11 @@ class RadiusCalculator:
         def calculate():
             try:
                 C = float(entry.get())
+                if C <= 0:
+                    raise ValueError("Circumference must be positive")
                 r = C / (2 * math.pi)
                 self.show_result(r)
-            except ValueError:
+            except (ValueError, TypeError):
                 self.show_error()
 
         tk.Button(self.right_frame, text="Calculate", font=("MS Sans Serif", 12),
@@ -80,9 +88,11 @@ class RadiusCalculator:
         def calculate():
             try:
                 S = float(entry.get())
+                if S <= 0:
+                    raise ValueError("Area must be positive")
                 r = math.sqrt(S / math.pi)
                 self.show_result(r)
-            except ValueError:
+            except (ValueError, TypeError):
                 self.show_error()
 
         tk.Button(self.right_frame, text="Calculate", font=("MS Sans Serif", 12),
@@ -98,9 +108,11 @@ class RadiusCalculator:
         def calculate():
             try:
                 V = float(entry.get())
+                if V <= 0:
+                    raise ValueError("Volume must be positive")
                 r = ((3 * V) / (4 * math.pi)) ** (1 / 3)
                 self.show_result(r)
-            except ValueError:
+            except (ValueError, TypeError):
                 self.show_error()
 
         tk.Button(self.right_frame, text="Calculate", font=("MS Sans Serif", 12),
@@ -122,20 +134,24 @@ class RadiusCalculator:
             try:
                 V = float(entry_v.get())
                 h = float(entry_h.get())
+                if V <= 0 or h <= 0:
+                    raise ValueError("Volume and height must be positive")
                 r = math.sqrt(V / (math.pi * h))
                 self.show_result(r)
-            except ValueError:
+            except (ValueError, TypeError, ZeroDivisionError):
                 self.show_error()
 
         tk.Button(self.right_frame, text="Calculate", font=("MS Sans Serif", 12),
                   bg="#835ca3", fg="white", command=calculate).pack(pady=10)
 
     def show_result(self, r):
+        self.clear_right_frame()
         tk.Label(self.right_frame, text=f"Result: r = {r:.4f}",
                  font=("MS Sans Serif", 14, "bold"),
                  bg="#e0e0e0", fg="black").pack(pady=15)
 
     def show_error(self):
+        self.clear_right_frame()
         tk.Label(self.right_frame, text="Invalid input!",
                  font=("MS Sans Serif", 12, "bold"),
                  bg="#e0e0e0", fg="red").pack(pady=15)
