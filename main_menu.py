@@ -2,12 +2,14 @@ import tkinter as tk
 from elements.calculator95 import RetroCalculator
 from elements.quadratic_solver import QuadraticSolverApp
 from elements.speed_converter import SpeedConverterApp
+from elements.radius_calculator import RadiusCalculator
+
 
 class MainMenu:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Айтішники")
-        self.root.geometry("400x420")
+        self.root.geometry("400x500")
         self.root.resizable(False, False)
         self.bg_color = "#c0c0c0"
         self.root.configure(bg=self.bg_color)
@@ -29,6 +31,9 @@ class MainMenu:
         tk.Button(btn_frame, text="Speed Converter", font=("MS Sans Serif", 13, "bold"),
                   width=22, height=2, bg="#ff8000", fg="white",
                   command=self.open_speed_converter).pack(pady=8)
+        tk.Button(btn_frame, text="Radius Calculator", font=("MS Sans Serif", 13, "bold"),
+                  width=22, height=2, bg="#835ca3", fg="white",
+                  command=self.open_radius_calculator).pack(pady=8)
 
         tk.Button(self.root, text="Exit", font=("MS Sans Serif", 12),
                   width=10, bg="#ff6060", fg="white",
@@ -45,6 +50,10 @@ class MainMenu:
     def open_speed_converter(self):
         win = tk.Toplevel(self.root)
         SpeedConverterApp(root=win)
+
+    def open_radius_calculator(self):
+        win = tk.Toplevel(self.root)
+        RadiusCalculator(root=win)
 
     def run(self):
         self.root.mainloop()
